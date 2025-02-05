@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import Stack from "@mui/material/Stack";
 import Barr from "./componets/Barr";
 ///list
 import List from "@mui/material/List";
@@ -30,7 +29,7 @@ function App() {
   };
   useEffect(() => {
     const storedValue = JSON.parse(localStorage.getItem("namesList"));
-    setListName(storedValue.length ? storedValue : []);
+    setListName(storedValue?.length ? storedValue : []);
   }, []);
   return (
     <>
