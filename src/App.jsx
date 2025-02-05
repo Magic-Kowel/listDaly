@@ -3,6 +3,8 @@ import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Barr from "./componets/Barr";
+import Checkbox from "@mui/material/Checkbox";
+
 ///list
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -10,11 +12,17 @@ import ListItemText from "@mui/material/ListItemText";
 
 function App() {
   const [name, setName] = useState("");
+  const [isempit, setIsempit] = useState(false);
   const [listName, setListName] = useState([]);
 
   const handleAddName = () => {
-    setListName((prev) => [...prev, name]);
+    if (!name.length) {
+      setIsempit(true);
+      return;
+    }
+    setListName((prev) => [...prev, name.toUpperCase().trim()]);
     setName("");
+    setIsempit(false);
   };
   const handleDeleteItem = (item) => {
     setListName((prev) => prev.toSpliced(item, 1));
@@ -46,6 +54,7 @@ function App() {
         >
           <Grid item xs={12} md={4}>
             <TextField
+              error={isempit}
               fullWidth
               value={name}
               onChange={(e) => setName(e.target.value)}
@@ -109,6 +118,7 @@ function App() {
                     </Button>
                   }
                 >
+                  <Checkbox />
                   <ListItemText primary={`${index + 1} - ${name}`} />
                 </ListItem>
               ))}
