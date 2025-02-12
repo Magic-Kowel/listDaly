@@ -3,13 +3,8 @@ import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Barr from "./componets/Barr";
-import Checkbox from "@mui/material/Checkbox";
-
-///list
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemText from "@mui/material/ListItemText";
-
+//table
+import DataTable from "./componets/DatataTable";
 function App() {
   const [name, setName] = useState("");
   const [isempit, setIsempit] = useState(false);
@@ -103,26 +98,11 @@ function App() {
         </Grid>
         <Grid container item xs={12} justifyContent="center">
           <Grid item xs={12} md={8}>
-            <List sx={{ width: "100%" }}>
-              {listName.map((name, index) => (
-                <ListItem
-                  key={`${name}-${index}`} // Asegurar clave única
-                  disableGutters
-                  secondaryAction={
-                    <Button
-                      color="error"
-                      onClick={() => handleDeleteItem(index)} // Corregir typo
-                      variant="contained"
-                    >
-                      Delete
-                    </Button>
-                  }
-                >
-                  <Checkbox />
-                  <ListItemText primary={`${index + 1} - ${name}`} />
-                </ListItem>
-              ))}
-            </List>
+            <DataTable
+              dataList={listName}
+              setListName={setListName}
+              handleDeleteItem={handleDeleteItem}
+            />
           </Grid>
         </Grid>
       </Grid>

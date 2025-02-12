@@ -6,7 +6,7 @@ function Barr() {
     <AppBar position="static">
       <Toolbar variant="dense">
         <Typography variant="h6" color="inherit" component="div">
-          List Daly
+          List Daily
         </Typography>
       </Toolbar>
     </AppBar>
