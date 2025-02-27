@@ -31,11 +31,27 @@ function DataTable({ dataList, setListName, handleDeleteItem }) {
     [newData[index], newData[index - 1]] = [newData[index - 1], newData[index]];
     setListName(newData);
   };
+  const handleMoveRowUpToTop = (index) => {
+    if (index === 0) return; // No mover si es la primera fila
+
+    const newData = [...dataList];
+    const item = newData.splice(index, 1);
+    newData.unshift(item);
+    setListName(newData);
+  };
   const handleMoveRowDown = (index) => {
     if (index === dataList.length - 1) return;
 
     const newData = [...dataList];
     [newData[index], newData[index + 1]] = [newData[index + 1], newData[index]];
+    setListName(newData);
+  };
+  const handleMoveRowUpToDown = (index) => {
+    if (index === dataList.length - 1) return;
+
+    const newData = [...dataList];
+    const item = newData.splice(index, 1);
+    newData.push(item);
     setListName(newData);
   };
   return (
@@ -50,10 +66,11 @@ function DataTable({ dataList, setListName, handleDeleteItem }) {
             paddingTop: "0.5rem",
           }}
         >
-          <TableContainer sx={{ maxHeight: 440 }}>
+          <TableContainer sx={{ maxHeight: 740 }}>
             <Table stickyHeader aria-label="sticky table">
               <TableHead>
                 <TableRow>
+                  <TableCell align="center"></TableCell>
                   <TableCell align="center">Name</TableCell>
                   <TableCell align="center">Move</TableCell>
                   <TableCell align="center">Delete</TableCell>
@@ -64,23 +81,28 @@ function DataTable({ dataList, setListName, handleDeleteItem }) {
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row, index) => (
                     <TableRow hover key={`${index}`} tabIndex={-1}>
+                      <TableCell padding="checkbox" align="center">
+                        <Checkbox />
+                      </TableCell>
                       <TableCell align="center">
-                        <Checkbox /> {index + 1} - {row}
+                        {index + 1} - {row}
                       </TableCell>
                       <TableCell align="center">
                         <ButtonGroup
                           variant="contained"
                           aria-label="Basic button group"
                         >
-                          <Button
-                            onClick={() => handleMoveRowUp(index)} // Corregir typo
-                          >
+                          <Button onClick={() => handleMoveRowUp(index)}>
                             ↑
                           </Button>
-                          <Button
-                            onClick={() => handleMoveRowDown(index)} // Corregir typo
-                          >
+                          <Button onClick={() => handleMoveRowUpToTop(index)}>
+                            ⤒
+                          </Button>
+                          <Button onClick={() => handleMoveRowDown(index)}>
                             ↓
+                          </Button>
+                          <Button onClick={() => handleMoveRowUpToDown(index)}>
+                            ⤓
                           </Button>
                         </ButtonGroup>
                       </TableCell>
