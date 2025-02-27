@@ -11,6 +11,7 @@ import {
   Checkbox,
   Button,
   ButtonGroup,
+  Tooltip,
 } from "@mui/material";
 import PropTypes from "prop-types";
 
@@ -92,18 +93,28 @@ function DataTable({ dataList, setListName, handleDeleteItem }) {
                           variant="contained"
                           aria-label="Basic button group"
                         >
-                          <Button onClick={() => handleMoveRowUp(index)}>
-                            ↑
-                          </Button>
-                          <Button onClick={() => handleMoveRowUpToTop(index)}>
-                            ⤒
-                          </Button>
-                          <Button onClick={() => handleMoveRowDown(index)}>
-                            ↓
-                          </Button>
-                          <Button onClick={() => handleMoveRowUpToDown(index)}>
-                            ⤓
-                          </Button>
+                          <Tooltip title="Up">
+                            <Button onClick={() => handleMoveRowUp(index)}>
+                              ↑
+                            </Button>
+                          </Tooltip>
+                          <Tooltip title="UpToTop">
+                            <Button onClick={() => handleMoveRowUpToTop(index)}>
+                              ⤒
+                            </Button>
+                          </Tooltip>
+                          <Tooltip title="Down">
+                            <Button onClick={() => handleMoveRowDown(index)}>
+                              ↓
+                            </Button>
+                          </Tooltip>
+                          <Tooltip title="UpToDown">
+                            <Button
+                              onClick={() => handleMoveRowUpToDown(index)}
+                            >
+                              ⤓
+                            </Button>
+                          </Tooltip>
                         </ButtonGroup>
                       </TableCell>
                       <TableCell align="center">
